@@ -3,7 +3,7 @@ A simple Worker written in Rust to explore Cloudflare's isolates (reuse, cold st
 ```
 ❯ curl https://counter-worker.YOURDOMAIN.workers.dev
 Counter: 1
-Could start: true
+Cold start: true
 Datacenter: AMS
 ```
 

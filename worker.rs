@@ -23,7 +23,7 @@ pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
     );
 
     Response::ok(format!(
-        "Counter: {}\nCould start: {}\nDatacenter: {}\n",
+        "Counter: {}\nCold start: {}\nDatacenter: {}\n",
         *counter,
         *counter == 1,
         req.cf().colo()
