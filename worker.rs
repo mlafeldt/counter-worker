@@ -8,6 +8,10 @@ lazy_static::lazy_static! {
 
 #[event(fetch)]
 pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
+    if req.path() != "/" {
+        return Response::error("Not found", 404);
+    }
+
     let mut counter = COUNTER.lock().unwrap();
     *counter += 1;
 
