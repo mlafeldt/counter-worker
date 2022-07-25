@@ -1,0 +1,13 @@
+[package]
+name = "counter-worker"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+path = "worker.rs"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+lazy_static = "1"
+worker = "0.0.9"
