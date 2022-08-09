@@ -1,16 +1,7 @@
 name = "counter-worker"
-type = "javascript"
+main = "build/worker/shim.mjs"
 workers_dev = true
-compatibility_date = "2022-07-25"
+compatibility_date = "2022-08-09"
 
 [build]
 command = "worker-build --release"
-
-[build.upload]
-dir    = "build/worker"
-format = "modules"
-main   = "./shim.mjs"
-
-[[build.upload.rules]]
-globs = ["**/*.wasm"]
-type  = "CompiledWasm"
