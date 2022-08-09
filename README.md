@@ -7,4 +7,6 @@ Cold start: true
 Datacenter: AMS
 ```
 
-Note: Use a real browser and reload the page to see isolate reuse in action.
+Use a real browser and reload the page to see isolate reuse in action.
+
+![](demo.gif)
