@@ -1,7 +1,7 @@
 name = "counter-worker"
 main = "build/worker/shim.mjs"
 workers_dev = true
-compatibility_date = "2022-08-09"
+compatibility_date = "2022-08-31"
 
 [build]
 command = "worker-build --release"
