@@ -3,5 +3,9 @@ main = "build/worker/shim.mjs"
 workers_dev = true
 compatibility_date = "2022-08-31"
 
+kv_namespaces = [
+    { binding = "COUNTER_CACHE", id = "7e62cb75f89e470083f0cc617df3f6d7", preview_id = "57deee65f8f94ea099f8405a38741dd8" },
+]
+
 [build]
 command = "worker-build --release"

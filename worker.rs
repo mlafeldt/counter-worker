@@ -7,13 +7,23 @@ lazy_static::lazy_static! {
 }
 
 #[event(fetch)]
-pub async fn main(req: Request, _env: Env, _ctx: Context) -> Result<Response> {
+pub async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
     if req.path() != "/" {
         return Response::error("Not found", 404);
     }
 
     let mut counter = COUNTER.lock().unwrap();
     *counter += 1;
+
+    let cache = env.kv("COUNTER_CACHE").unwrap();
+    cache
+        .put(
+            &req.headers().get("x-real-ip").ok().flatten().unwrap(),
+            *counter,
+        )
+        .unwrap()
+        .execute()
+        .await?;
 
     console_log!(
         "counter={} cf={:?} headers={:?}",
