@@ -12,18 +12,26 @@ pub async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
         return Response::error("Not found", 404);
     }
 
+    let ip = req.headers().get("x-real-ip").ok().flatten().unwrap();
+
+    let cache = env.kv("COUNTER_CACHE").unwrap();
+
+    if let Some(counter) = cache.get(&ip).cache_ttl(60).text().await? {
+        console_log!("kv_counter={}", counter);
+    } else {
+        console_log!("kv_counter is empty");
+    }
+
     let mut counter = COUNTER.lock().unwrap();
     *counter += 1;
 
     let cache = env.kv("COUNTER_CACHE").unwrap();
-    cache
-        .put(
-            &req.headers().get("x-real-ip").ok().flatten().unwrap(),
-            *counter,
-        )
-        .unwrap()
-        .execute()
-        .await?;
+    // cache
+    //     .put(&ip, *counter)
+    //     .unwrap()
+    //     .expiration_ttl(60)
+    //     .execute()
+    //     .await?;
 
     console_log!(
         "counter={} cf={:?} headers={:?}",
